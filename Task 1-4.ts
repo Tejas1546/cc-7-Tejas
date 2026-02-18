@@ -60,7 +60,6 @@ assert.deepStrictEqual(blueGreenHearts(5), [
   "💙 💙 💙 💙 ",
   "💚 💚 💚 💚 💚 ",
 ]);
-
 console.log("\n\n");
 
 // ! 3. Alternating Heart Pattern
