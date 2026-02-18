@@ -1,0 +1,24 @@
+{
+  "name": "cc-7-tejas",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tejas1546/cc-7-Tejas.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/Tejas1546/cc-7-Tejas/issues"
+  },
+  "homepage": "https://github.com/Tejas1546/cc-7-Tejas#readme",
+  "devDependencies": {
+    "@types/node": "^25.2.3"
+  },
+  "description": ""
+}
