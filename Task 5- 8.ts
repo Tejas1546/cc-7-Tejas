@@ -1,5 +1,4 @@
 import assert from "assert";
-import { log } from "console";
 // ! 5. Print N Odd or Even Numbers
 
 type EvenOrOdd = "even" | "odd";
@@ -10,9 +9,9 @@ type EvenOrOdd = "even" | "odd";
  * @param evenOrOdd to specify whether the number to be printed is even or odd
  * @returns a array of numbers which is either in the even or odd state as defined by the user
  */
-function printNumbers(n: number, evenOrOdd: EvenOrOdd): number[] {
-  let res: number[] = [];
-  let c = 0;
+function printNumbers(countOfNumbers: number, evenOrOdd: EvenOrOdd): number[] {
+  let result: number[] = [];
+  let count = 0;
   let temp: number;
   if (evenOrOdd === "even") {
     temp = 0;
@@ -20,46 +19,47 @@ function printNumbers(n: number, evenOrOdd: EvenOrOdd): number[] {
     temp = -1;
   }
   do {
-    c++;
+    count++;
     temp += 2;
-    res.push(temp);
-  } while (c !== n);
-  return res;
+    result.push(temp);
+  } while (count !== countOfNumbers);
+  return result;
 }
 console.log(printNumbers(5, "even"));
-assert.deepEqual(printNumbers(1, "even"), [2]);
-assert.deepEqual(printNumbers(1, "odd"), [1]);
-assert.deepEqual(printNumbers(3, "even"), [2, 4, 6]);
-// assert.deepEqual(printNumbers(3, "even"), [1, 3, 5]); // * this should cause a error to throw up (illegal way to check if the assertion is working or not)
+assert.deepStrictEqual(printNumbers(1, "even"), [2]);
+assert.deepStrictEqual(printNumbers(1, "odd"), [1]);
+assert.deepStrictEqual(printNumbers(3, "even"), [2, 4, 6]);
 console.log("\n\n");
 
 // ! 6. Pad Zeros Before a Number
 
 /**
  * The padZerosBeforeNumber function takes in a number and number of digits parameters and returns a number with '0' padding infront of the number to match the length to numOfDigits
- * @param number the parameter to be modified
+ * @param numAsString the parameter to be modified
  * @param numOfDigits the length of the resultant
  * @returns the resultant with '0' padding added in front
  */
-function padZerosBeforeNumber(number: number, numOfDigits: number): string {
-  let n1 = String(number);
+function padZerosBeforeNumber(
+  numAsString: number,
+  numOfDigits: number,
+): string {
+  let n1 = String(numAsString);
   if (n1.length - 1 >= numOfDigits) return n1;
-  let flag = 0;
+  let negativeSignFound = false;
   if (n1[0] === "-") {
-    flag = 1;
+    negativeSignFound = true;
     n1 = n1.slice(1);
   }
   n1 = n1.padStart(numOfDigits, "0");
-  if (flag === 1) {
+  if (negativeSignFound === true) {
     n1 = "-" + n1;
   }
   return n1;
 }
 console.log(padZerosBeforeNumber(500, 5));
 console.log(padZerosBeforeNumber(-500, 5));
-assert.deepEqual(padZerosBeforeNumber(500, 5), "00500");
-assert.deepEqual(padZerosBeforeNumber(-500, 5), "-00500");
-// assert.deepEqual(padZerosBeforeNumber(500, 3), "00500");// * this should cause a error to throw up (illegal way to check if the assertion is working or not)
+assert.deepStrictEqual(padZerosBeforeNumber(500, 5), "00500");
+assert.deepStrictEqual(padZerosBeforeNumber(-500, 5), "-00500");
 console.log("\n\n");
 
 // ! 7. Convert Decimal to Binary
@@ -71,17 +71,16 @@ console.log("\n\n");
  */
 function convertToBinary(numInDecimal: number): string {
   if (numInDecimal === 0) return "0";
-  let res = "";
+  let resultString = "";
   while (numInDecimal > 0) {
-    res = (numInDecimal % 2) + res;
+    resultString = (numInDecimal % 2) + res;
     numInDecimal = Math.floor(numInDecimal / 2);
   }
-  return res;
+  return resultString;
 }
 console.log(convertToBinary(10));
-assert.deepEqual(convertToBinary(10), "1010");
-assert.deepEqual(convertToBinary(30), "11110");
-// assert.deepEqual(convertToBinary(88), "10001");// * this should cause a error to throw up (illegal way to check if the assertion is working or not)
+assert.deepStrictEqual(convertToBinary(10), "1010");
+assert.deepStrictEqual(convertToBinary(30), "11110");
 console.log("\n\n");
 
 // ! 8. Substring Until Repeating Character
@@ -93,24 +92,22 @@ console.log("\n\n");
  */
 function getStringSpecial(str: string): string {
   let length = str.length;
-  if (length === 0) return "";
-  if (length === 1) return str;
+  if (length === 1 || length == 0) return str;
   let i: number;
   for (i = 1; i < length; i++) {
-    let flag = 0;
+    let repetitionFound = false;
     for (let j = i - 1; j >= 0; j--) {
       if (str[i] === str[j]) {
-        flag = 1;
+        repetitionFound = true;
         break;
       }
     }
-    if (flag === 1) break;
+    if (repetitionFound === true) break;
   }
   return str.slice(0, i);
 }
 
 console.log(getStringSpecial("a dream that is"));
-assert.deepEqual(getStringSpecial("a dream that is"), "a dre");
-assert.deepEqual(getStringSpecial("unparliamentary"), "unparli");
-//assert.deepEqual(getStringSpecial("Tejas Shetty"), "Tejas ");// * this should cause a error to throw up (illegal way to check if the assertion is working or not)
+assert.deepStrictEqual(getStringSpecial("a dream that is"), "a dre");
+assert.deepStrictEqual(getStringSpecial("unparliamentary"), "unparli");
 console.log("\n\n");

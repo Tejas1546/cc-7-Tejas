@@ -8,28 +8,27 @@ import assert from "assert";
  * @returns resultant array
  */
 function addArrays(a: number[], b: number[]): number[] {
-  let res: number[] = [];
+  let resultArray: number[] = [];
   let n = a.length < b.length ? a.length : b.length;
   let i: number;
   for (i = 0; i < n; i++) {
-    res.push(a[i] + b[i]);
+    resultArray.push(a[i] + b[i]);
   }
   if (a.length > i) {
     for (let j = i; j < a.length; j++) {
-      res.push(a[j]);
+      resultArray.push(a[j]);
     }
   }
   if (b.length > i) {
     for (let j = i; j < b.length; j++) {
-      res.push(b[j]);
+      resultArray.push(b[j]);
     }
   }
-  return res;
+  return resultArray;
 }
 console.log(addArrays([2, 3, 5], [5, 6, 4]));
-assert.deepEqual(addArrays([2, 3, 5], [5, 6, 4]), [7, 9, 9]);
-assert.deepEqual(addArrays([2, 2], [4, 5, 6]), [6, 7, 6]);
-// assert.deepEqual(addArrays([2, 2], [4, 5, 6]), [4, 5, 5]); // * this should cause a error to throw up (illegal way to check if the assertion is working or not)
+assert.deepStrictEqual(addArrays([2, 3, 5], [5, 6, 4]), [7, 9, 9]);
+assert.deepStrictEqual(addArrays([2, 2], [4, 5, 6]), [6, 7, 6]);
 console.log("\n\n");
 
 // ! 10. Compute String Length (Without .length)
@@ -40,13 +39,13 @@ console.log("\n\n");
  * @returns the length of the string
  */
 function lengthOfString(str: string): number {
-  let n: number = 0;
-  while (str[n++] !== undefined) {}
-  return n - 1;
+  let length: number = 0;
+  let character = [...str]; // this spread method will store each character into the array
+  while (character[length++] !== undefined) {}
+  return length - 1;
 }
 console.log(lengthOfString("one world"));
-assert.deepEqual(lengthOfString("Tejas"), 5);
-// assert.deepEqual(lengthOfString("Tejas"), 7);// * this should cause a error to throw up (illegal way to check if the assertion is working or not)
+assert.deepStrictEqual(lengthOfString("Tejas👆"), 6);
 console.log("\n\n");
 
 //! 11. First N Perfect Squares
@@ -58,17 +57,16 @@ console.log("\n\n");
  */
 function generateFirstSquares(n: number): number[] {
   if (n <= 0) return [];
-  let res: number[] = [];
+  let resultArray: number[] = [];
   let i = 0;
   while (i !== n) {
     i++;
-    res.push(i * i);
+    resultArray.push(i * i);
   }
-  return res;
+  return resultArray;
 }
 console.log(generateFirstSquares(4));
-assert.deepEqual(generateFirstSquares(4), [1, 4, 9, 16]);
-//assert.deepEqual(generateFirstSquares(3), [1, 4, 8]);// * this should cause a error to throw up (illegal way to check if the assertion is working or not)
+assert.deepStrictEqual(generateFirstSquares(4), [1, 4, 9, 16]);
 console.log("\n\n");
 
 // ! Get Day of Week from Name
@@ -101,6 +99,5 @@ function getDayOfWeek(dayName: DayName): Result {
   }
 }
 console.log(getDayOfWeek("mon"));
-assert.deepEqual(getDayOfWeek("mon"), 1);
-assert.deepEqual(getDayOfWeek("hi"), -1);
-// assert.deepEqual(getDayOfWeek("tue"), 3); // * this should cause a error to throw up (illegal way to check if the assertion is working or not)
+assert.deepStrictEqual(getDayOfWeek("mon"), 1);
+assert.deepStrictEqual(getDayOfWeek("hi"), -1);
