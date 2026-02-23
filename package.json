@@ -1,0 +1,33 @@
+{
+  "name": "cc-7-tejas",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tejas1546/cc-7-Tejas.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Tejas1546/cc-7-Tejas/issues"
+  },
+  "homepage": "https://github.com/Tejas1546/cc-7-Tejas#readme",
+  "license": "ISC",
+  "lint-staged": {
+    "*.{js,ts}": "eslint --fix"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged"
+  },
+  "devDependencies": {
+    "@types/node": "^25.2.3",
+    "eslint-define-config": "^2.1.0",
+    "globals": "^17.3.0",
+    "pretty-quick": "^4.2.2",
+    "simple-git-hooks": "^2.13.1",
+    "typescript-eslint": "^8.56.0"
+  },
+  "description": ""
+}
