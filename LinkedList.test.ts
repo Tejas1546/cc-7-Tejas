@@ -1,12 +1,11 @@
 import { describe, expect, it } from "vitest";
 // Import the factory function and the interface
-import { createLinkedList, LinkedListInterface } from "./LinkedList";
+import { LinkedList, LinkedListInterface } from "./LinkedList";
 
 describe("LinkedList", () => {
   describe("Add node at the end", () => {
     it("Adding node to the end", () => {
-      const linkedlist: LinkedListInterface<string> =
-        createLinkedList<string>();
+      const linkedlist: LinkedListInterface<string> = new LinkedList<string>();
       linkedlist.addAtEnd("first");
       linkedlist.addAtEnd("second");
       linkedlist.addAtEnd("third");
@@ -19,8 +18,7 @@ describe("LinkedList", () => {
 
   describe("Remove the node from the end", () => {
     it("Removing node '3' and '2' from the end", () => {
-      const linkedlist: LinkedListInterface<number> =
-        createLinkedList<number>();
+      const linkedlist: LinkedListInterface<number> = new LinkedList<number>();
       linkedlist.addAtEnd(1);
       linkedlist.addAtEnd(2);
       linkedlist.addAtEnd(3);
@@ -37,8 +35,7 @@ describe("LinkedList", () => {
 
   describe("Add node to the head", () => {
     it("Adding a '3' node to the head", () => {
-      const linkedlist: LinkedListInterface<number> =
-        createLinkedList<number>();
+      const linkedlist: LinkedListInterface<number> = new LinkedList<number>();
       linkedlist.addAtHead(1);
       linkedlist.addAtHead(2);
 
@@ -50,8 +47,7 @@ describe("LinkedList", () => {
 
   describe("Remove node from the head", () => {
     it("Removing the 'new' node from the head", () => {
-      const linkedlist: LinkedListInterface<string> =
-        createLinkedList<string>();
+      const linkedlist: LinkedListInterface<string> = new LinkedList<string>();
       linkedlist.addAtHead("first");
       linkedlist.addAtEnd("last");
       linkedlist.addAtHead("new");
@@ -64,8 +60,7 @@ describe("LinkedList", () => {
 
   describe("Search for node", () => {
     it("Search for a node 'titan' in the list", () => {
-      const linkedlist: LinkedListInterface<string> =
-        createLinkedList<string>();
+      const linkedlist: LinkedListInterface<string> = new LinkedList<string>();
       linkedlist.addAtHead("bronze");
       linkedlist.addAtHead("silver");
       linkedlist.addAtHead("gold");
@@ -81,8 +76,7 @@ describe("LinkedList", () => {
 
   describe("Check list length", () => {
     it("Should return the correct length of the list", () => {
-      const linkedlist: LinkedListInterface<number> =
-        createLinkedList<number>();
+      const linkedlist: LinkedListInterface<number> = new LinkedList<number>();
       linkedlist.addAtHead(11);
       linkedlist.addAtHead(22);
       linkedlist.addAtHead(33);
