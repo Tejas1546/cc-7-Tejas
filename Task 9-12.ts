@@ -39,13 +39,12 @@ console.log("\n\n");
  * @returns the length of the string
  */
 function lengthOfString(str: string): number {
-  let length: number = 0;
-  let character = [...str]; // this spread method will store each character into the array
-  while (character[length++] !== undefined) {}
-  return length - 1;
+  const segmenter = new Intl.Segmenter(undefined, { granularity: "grapheme" });
+  return [...segmenter.segment(str)].length;
 }
 console.log(lengthOfString("one world"));
-assert.deepStrictEqual(lengthOfString("Tejas👆"), 6);
+assert.deepStrictEqual(lengthOfString("Tejas👨‍👩‍👧‍👦"), 6);
+assert.deepStrictEqual(lengthOfString("👩🏽‍🔬🏴󠁧󠁢󠁳󠁣󠁴󠁿Hi"), 4);
 console.log("\n\n");
 
 //! 11. First N Perfect Squares
