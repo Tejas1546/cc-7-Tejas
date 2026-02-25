@@ -73,7 +73,7 @@ function convertToBinary(numInDecimal: number): string {
   if (numInDecimal === 0) return "0";
   let resultString = "";
   while (numInDecimal > 0) {
-    resultString = (numInDecimal % 2) + res;
+    resultString = (numInDecimal % 2) + resultString;
     numInDecimal = Math.floor(numInDecimal / 2);
   }
   return resultString;

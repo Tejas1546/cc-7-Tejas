@@ -4,7 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "vitest"
   },
   "repository": {
     "type": "git",
@@ -27,7 +27,8 @@
     "globals": "^17.3.0",
     "pretty-quick": "^4.2.2",
     "simple-git-hooks": "^2.13.1",
-    "typescript-eslint": "^8.56.0"
+    "typescript-eslint": "^8.56.0",
+    "vitest": "^4.0.18"
   },
   "description": ""
 }
