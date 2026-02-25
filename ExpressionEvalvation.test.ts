@@ -27,11 +27,11 @@ describe("Expression Evaluator using Stack", () => {
   });
 
   it("should throw error for division by zero", () => {
-    expect(() => evaluate("10/0")).toThrow();
+    expect(() => evaluate("10/0")).toThrow("Division by zero");
   });
 
   it("should throw error for invalid expression", () => {
-    expect(() => evaluate("2+")).toThrow();
+    expect(() => evaluate("2+")).toThrow("Invalid Expression");
   });
 
   it("should evaluate floating-point expressions", () => {
