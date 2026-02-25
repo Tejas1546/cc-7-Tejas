@@ -74,6 +74,19 @@ describe("LinkedList", () => {
     });
   });
 
+  describe("Search for object node", () => {
+    it("Search for a node 'titan' in the list", () => {
+      const linkedlist: LinkedListInterface<number[]> = new LinkedList<
+        number[]
+      >();
+      linkedlist.addAtEnd([1, 2, 3]);
+      linkedlist.addAtEnd([1, 2, 3]);
+      linkedlist.addAtEnd([1, 2, 3]);
+      expect(linkedlist.searchFor([2])).toBe(null);
+      expect(linkedlist.searchFor([1, 2, 3])).toBe([1, 2, 3]);
+    });
+  });
+
   describe("Check list length", () => {
     it("Should return the correct length of the list", () => {
       const linkedlist: LinkedListInterface<number> = new LinkedList<number>();

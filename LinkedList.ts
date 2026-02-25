@@ -15,7 +15,7 @@ export interface LinkedListInterface<T> {
   removeFromEnd(): T | null;
   addAtHead(t: T): T;
   removeFromHead(): T | null;
-  searchFor(t: T): T | null;
+  searchFor(t: T, compFun?: (v: T, other: T) => boolean): T | null;
 }
 
 /**
@@ -93,10 +93,12 @@ export class LinkedList<T> implements LinkedListInterface<T> {
     return removedElement;
   }
 
-  searchFor(t: T): T | null {
+  searchFor(t: T, compFun?: (v: T, other: T) => boolean): T | null {
     let current = this.#head;
+    const comparator = compFun ?? ((a: T, b: T) => a === b);
+
     while (current) {
-      if (current.value == t) {
+      if (comparator(current.value, t)) {
         return current.value;
       }
       current = current.next;
