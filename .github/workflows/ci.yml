@@ -24,9 +24,11 @@ jobs:
         run: npm install
 
       - name: Run Linter
-        # This will check for syntax and style issues defined in your config
+        # Checks for syntax and style issues (like the 'const' fixes we did)
         run: npx eslint .
 
       - name: Run All Tests and Tasks
-        # This runs your .test.ts files AND your Task files with assertions
-        run: npx vitest run --include "**/*.{ts,test.ts}" --exclude "node_modules/**"
+        # 1. We pass the file pattern directly instead of using --include
+        # 2. --passWithNoTests prevents failure on files without assertions
+        # 3. Vitest will execute your 'Task' files and catch any 'AssertionError'
+        run: npx vitest run "**/*.ts" --exclude "node_modules/**" --passWithNoTests

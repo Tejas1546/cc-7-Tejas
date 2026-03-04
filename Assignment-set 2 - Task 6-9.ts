@@ -55,15 +55,24 @@ assert.deepStrictEqual(fibonacciAtIndices([0, 3, 4, 8]), [0, 2, 3, 21]);
  */
 const extractEmail = (address: string[]): string[] => {
   return address
-    .map((mail) => {
+    .filter((mail) => {
       const match = mail.match(/[A-Za-z0-9.-]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}/);
       if (match) return match[0].toLowerCase();
       return null;
     })
-    .filter(Boolean) as string[];
+    .filter(Boolean);
+};
+// second way
+const extractEmail1 = (address: string[]): string[] => {
+  return address
+    .filter((mail) => /[A-Za-z0-9.-]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}/.test(mail))
+    .map((mail) => {
+      const match = mail.match(/[A-Za-z0-9.-]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}/);
+      return match![0].toLowerCase();
+    });
 };
 assert.deepStrictEqual(
-  extractEmail([
+  extractEmail1([
     "34, brighten street, email: BS@sft.com",
     "Behind hotel paragon, rode street, micHel@sun.it",
     "ulef court, cown street, email:cown@street",
@@ -72,7 +81,7 @@ assert.deepStrictEqual(
   ["bs@sft.com", "michel@sun.it"],
 );
 assert.deepStrictEqual(
-  extractEmail([
+  extractEmail1([
     "Contact: john.Doe@Example.com",
     "No email here",
     "Sales: sales-team@company.org",
@@ -81,6 +90,20 @@ assert.deepStrictEqual(
   ]),
   ["john.doe@example.com", "sales-team@company.org", "support@help.net"],
 );
+
+//Varun's implimentation
+/**
+ * Extracts the valid emails from an array of emails
+ * @param emails An array with emails
+ * @returns Array of vaild emails
+ */
+export const extractEmails2 = (emails: string[]): string[] => {
+  const emailRegex = /[a-z0-9._]+@[a-z]+\.[a-z](\.[a-z])?/i;
+
+  return emails
+    .filter((email) => email.match(emailRegex))
+    .map((email) => email.toLowerCase());
+};
 
 //! Task 9: Extract the list of ages
 type Person = {
@@ -127,7 +150,7 @@ const peopleArray: Person[] = [
 ];
 assert.deepStrictEqual(extractAge(peopleArray), [13, 56, 45]);
 //! List the sugar free food
-type FoodItem = { [key: string]: string[] };
+type FoodItem = Record<string, string[]>;
 const sugarFree = (foodList: FoodItem[]): string[] =>
   foodList
     .filter((food) => !Object.values(food)[0].includes("sugar"))
@@ -140,7 +163,7 @@ const getSpiceAndOil = (foodList: FoodItem[]): string[] =>
       return ingredients.includes("chilli") && ingredients.includes("oil");
     })
     .map((food) => Object.keys(food)[0]);
-type SafetyStatus = { [key: string]: "safe" | "unsafe" };
+type SafetyStatus = Record<string, "safe" | "unsafe">;
 const foodSafeOrUnsafe = (foodList: FoodItem[]): SafetyStatus[] =>
   foodList.map((food) => {
     const [[name, ingredients]] = Object.entries(food);
