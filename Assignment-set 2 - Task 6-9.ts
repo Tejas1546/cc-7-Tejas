@@ -62,6 +62,25 @@ const extractEmail = (address: string[]): string[] => {
     })
     .filter(Boolean);
 };
+assert.deepStrictEqual(
+  extractEmail([
+    "34, brighten street, email: BS@sft.com",
+    "Behind hotel paragon, rode street, micHel@sun.it",
+    "ulef court, cown street, email:cown@street",
+    "CodeCraft",
+  ]),
+  ["bs@sft.com", "michel@sun.it"],
+);
+assert.deepStrictEqual(
+  extractEmail([
+    "Contact: john.Doe@Example.com",
+    "No email here",
+    "Sales: sales-team@company.org",
+    "Random text",
+    "Support: SUPPORT@help.net",
+  ]),
+  ["john.doe@example.com", "sales-team@company.org", "support@help.net"],
+);
 // second way
 const extractEmail1 = (address: string[]): string[] => {
   return address
