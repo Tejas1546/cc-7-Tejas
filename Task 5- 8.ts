@@ -10,7 +10,7 @@ type EvenOrOdd = "even" | "odd";
  * @returns a array of numbers which is either in the even or odd state as defined by the user
  */
 function printNumbers(countOfNumbers: number, evenOrOdd: EvenOrOdd): number[] {
-  let result: number[] = [];
+  const result: number[] = [];
   let count = 0;
   let temp: number;
   if (evenOrOdd === "even") {
@@ -91,7 +91,7 @@ console.log("\n\n");
  * @returns the unique substring
  */
 function getStringSpecial(str: string): string {
-  let length = str.length;
+  const length = str.length;
   if (length === 1 || length == 0) return str;
   let i: number;
   for (i = 1; i < length; i++) {

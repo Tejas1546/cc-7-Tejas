@@ -12,7 +12,7 @@ import assert from "assert";
  */
 
 function blueHearts(lineCount: number): string[] {
-  let res: string[] = [];
+  const res: string[] = [];
   for (let i = 0; i < lineCount; i++) {
     let linePrint = "";
     for (let j = 0; j <= i; j++) {
@@ -39,7 +39,7 @@ assert.deepStrictEqual(blueHearts(2), ["💙 ", "💙 💙 "]);
  */
 
 function blueGreenHearts(lineCount: number): string[] {
-  let res: string[] = [];
+  const res: string[] = [];
   for (let i = 0; i < lineCount; i++) {
     const heart = i % 2 === 1 ? "💙 " : "💚 ";
     let linePrint = "";
@@ -77,7 +77,7 @@ console.log("\n\n");
  * @returns a string object with the patterns
  */
 function alternatingGreenBlue(lineCount: number): string[] {
-  let res: string[] = [];
+  const res: string[] = [];
   for (let i = 0; i < lineCount; i++) {
     let linePrint = "";
     for (let j = 0; j <= i; j++) {
@@ -112,11 +112,11 @@ console.log("\n\n");
  * @returns a string object with the patterns
  */
 function boundedHearts(lineCount: number): string[] {
-  let res: string[] = [];
+  const res: string[] = [];
   for (let i = 0; i < lineCount; i++) {
     let linePrint = "";
     for (let j = 0; j <= i; j++) {
-      let isBorder = j === 0 || j === i || i === lineCount - 1;
+      const isBorder = j === 0 || j === i || i === lineCount - 1;
       linePrint += isBorder ? "💙 " : "💚 ";
     }
     res.push(linePrint);

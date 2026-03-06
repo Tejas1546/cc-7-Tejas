@@ -8,8 +8,8 @@ import assert from "assert";
  * @returns resultant array
  */
 function addArrays(a: number[], b: number[]): number[] {
-  let resultArray: number[] = [];
-  let n = a.length < b.length ? a.length : b.length;
+  const resultArray: number[] = [];
+  const n = a.length < b.length ? a.length : b.length;
   let i: number;
   for (i = 0; i < n; i++) {
     resultArray.push(a[i] + b[i]);
@@ -56,7 +56,7 @@ console.log("\n\n");
  */
 function generateFirstSquares(n: number): number[] {
   if (n <= 0) return [];
-  let resultArray: number[] = [];
+  const resultArray: number[] = [];
   let i = 0;
   while (i !== n) {
     i++;
