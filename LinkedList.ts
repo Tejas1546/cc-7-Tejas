@@ -39,7 +39,7 @@ export class LinkedList<T> implements LinkedListInterface<T> {
   }
 
   addAtEnd(t: T): T {
-    let newNode = new ListNode(t);
+    const newNode = new ListNode(t);
     if (!this.#head) {
       this.#head = newNode;
       this.#tail = newNode;
@@ -53,7 +53,7 @@ export class LinkedList<T> implements LinkedListInterface<T> {
 
   removeFromEnd(): T | null {
     if (!this.#head) return null;
-    let removedElement = this.#tail!.value;
+    const removedElement = this.#tail!.value;
     if (this.#head === this.#tail) {
       this.#head = null;
       this.#tail = null;
@@ -70,7 +70,7 @@ export class LinkedList<T> implements LinkedListInterface<T> {
   }
 
   addAtHead(t: T): T {
-    let newNode = new ListNode(t);
+    const newNode = new ListNode(t);
     if (!this.#head) {
       this.#head = newNode;
       this.#tail = newNode;
@@ -84,7 +84,7 @@ export class LinkedList<T> implements LinkedListInterface<T> {
 
   removeFromHead(): T | null {
     if (!this.#head) return null;
-    let removedElement = this.#head.value;
+    const removedElement = this.#head.value;
     this.#head = this.#head.next;
     if (!this.#head) {
       this.#tail = null;

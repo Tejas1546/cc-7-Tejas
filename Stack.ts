@@ -15,7 +15,7 @@ export class Stack<T> {
   }
 
   pop(): T | null {
-    let removedElement = this.items.removeFromHead();
+    const removedElement = this.items.removeFromHead();
     return removedElement;
   }
 

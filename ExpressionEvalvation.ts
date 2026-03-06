@@ -40,11 +40,11 @@ function calculate(a: number, b: number, op: string): number {
  * @returns returns a resulting number if the expression is valid else a error is thrown
  */
 export function evaluate(expression: string): number {
-  let value = new Stack<number>();
-  let operator = new Stack<string>();
+  const value = new Stack<number>();
+  const operator = new Stack<string>();
   let i = 0;
   while (i < expression.length) {
-    let ch = expression[i];
+    const ch = expression[i];
     if (ch === " ") {
       i++;
       continue;
@@ -66,9 +66,9 @@ export function evaluate(expression: string): number {
       operator.push(ch);
     } else if (ch === ")") {
       while (operator.top() !== "(") {
-        let b = value.pop();
-        let a = value.pop();
-        let op = operator.pop();
+        const b = value.pop();
+        const a = value.pop();
+        const op = operator.pop();
         if (a === null || b === null || op === null) {
           throw new Error("Invalid Expression");
         }
@@ -81,9 +81,9 @@ export function evaluate(expression: string): number {
         operator.top() !== null &&
         precedence(operator.top() as string) >= precedence(ch)
       ) {
-        let b = value.pop();
-        let a = value.pop();
-        let op = operator.pop();
+        const b = value.pop();
+        const a = value.pop();
+        const op = operator.pop();
         if (a === null || b === null || op === null) {
           throw new Error("Invalid Expression");
         }
@@ -94,15 +94,15 @@ export function evaluate(expression: string): number {
     i++;
   }
   while (operator.top() !== null) {
-    let b = value.pop();
-    let a = value.pop();
-    let op = operator.pop();
+    const b = value.pop();
+    const a = value.pop();
+    const op = operator.pop();
     if (a === null || b === null || op === null) {
       throw new Error("Invalid Expression");
     }
     value.push(calculate(a, b, op));
   }
-  let result = value.pop();
+  const result = value.pop();
   if (result === null) throw new Error("Invalid Expression");
   return result;
 }
