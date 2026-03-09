@@ -53,35 +53,6 @@ assert.deepStrictEqual(fibonacciAtIndices([0, 3, 4, 8]), [0, 2, 3, 21]);
  * @param address the array of strings containing the address details
  * @returns the array of string that returns the extracted emails
  */
-const extractEmail = (address: string[]): string[] => {
-  return address
-    .filter((mail) => {
-      const match = mail.match(/[A-Za-z0-9.-]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}/);
-      if (match) return match[0].toLowerCase();
-      return null;
-    })
-    .filter(Boolean);
-};
-assert.deepStrictEqual(
-  extractEmail([
-    "34, brighten street, email: BS@sft.com",
-    "Behind hotel paragon, rode street, micHel@sun.it",
-    "ulef court, cown street, email:cown@street",
-    "CodeCraft",
-  ]),
-  ["bs@sft.com", "michel@sun.it"],
-);
-assert.deepStrictEqual(
-  extractEmail([
-    "Contact: john.Doe@Example.com",
-    "No email here",
-    "Sales: sales-team@company.org",
-    "Random text",
-    "Support: SUPPORT@help.net",
-  ]),
-  ["john.doe@example.com", "sales-team@company.org", "support@help.net"],
-);
-// second way
 const extractEmail1 = (address: string[]): string[] => {
   return address
     .filter((mail) => /[A-Za-z0-9.-]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}/.test(mail))
@@ -197,3 +168,9 @@ const foods: FoodItem[] = [
 ];
 assert.deepStrictEqual(sugarFree(foods), ["idli", "paneer masala"]);
 assert.deepStrictEqual(getSpiceAndOil(foods), ["pizza"]);
+assert.deepStrictEqual(foodSafeOrUnsafe(foods), [
+  { idli: "safe" },
+  { chapathi: "unsafe" },
+  { pizza: "unsafe" },
+  { "paneer masala": "safe" },
+]);

@@ -75,15 +75,17 @@ describe("LinkedList", () => {
   });
 
   describe("Search for object node", () => {
-    it("Search for a node 'titan' in the list", () => {
-      const linkedlist: LinkedListInterface<number[]> = new LinkedList<
-        number[]
-      >();
+    it("Search for a node [1, 2, 3] using a custom comparator", () => {
+      const linkedlist = new LinkedList<number[]>();
+
       linkedlist.addAtEnd([1, 2, 3]);
-      linkedlist.addAtEnd([1, 2, 3]);
-      linkedlist.addAtEnd([1, 2, 3]);
-      expect(linkedlist.searchFor([2])).toBe(null);
-      expect(linkedlist.searchFor([1, 2, 3])).toBe([1, 2, 3]);
+      linkedlist.addAtEnd([4, 5, 6]);
+      const arrayComparator = (a: number[], b: number[]) =>
+        a.length === b.length && a.every((val, index) => val === b[index]);
+      expect(linkedlist.searchFor([2], arrayComparator)).toBe(null);
+      expect(linkedlist.searchFor([1, 2, 3], arrayComparator)).toEqual([
+        1, 2, 3,
+      ]);
     });
   });
 
