@@ -293,3 +293,5 @@ vite.config.ts.timestamp-*
 
 # Husky git hooks directory
 .husky/
+
+coverage/

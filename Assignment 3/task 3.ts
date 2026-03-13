@@ -6,7 +6,7 @@ import pathM from "path";
  * @param path takes in the absolute path of a file or a folder
  * @returns the path is a File or a folder
  */
-async function getFileType(
+export async function getFileType(
   path: string,
 ): Promise<"FILE" | "DIRECTORY" | "OTHER"> {
   try {
@@ -24,7 +24,7 @@ async function getFileType(
  * @param path takes in the absolute path of a file or a folder
  * @returns if the path is a file then it returns the path, if it is directory it acts like the 'ls' command used in linux systems
  */
-async function getContents(path: string): Promise<string | string[]> {
+export async function getContents(path: string): Promise<string | string[]> {
   try {
     const type = await getFileType(path);
     if (type === "FILE") return path;
@@ -43,7 +43,7 @@ async function getContents(path: string): Promise<string | string[]> {
  * @param path takes in the absolute path of a file or a folder
  * @returns returns the size of the file or the folder of the given path in bytes
  */
-async function getSize(path: string): Promise<number> {
+export async function getSize(path: string): Promise<number> {
   let stats;
   try {
     stats = await stat(path);
@@ -72,7 +72,7 @@ async function getSize(path: string): Promise<number> {
 
 //console based testing
 const tpath =
-  "/mnt/c/Users/Tejas/Desktop/internship/task/cc-7-Tejas/Assignment 3/task 1.ts";
+  "/mnt/c/Users/Tejas/Desktop/internship/task/cc-7-Tejas/Assignment 1/Stack.ts";
 getFileType(tpath)
   .then((type) => {
     console.log("Type:", type);
