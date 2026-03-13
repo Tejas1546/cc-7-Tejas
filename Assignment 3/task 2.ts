@@ -43,18 +43,20 @@ function getContents(path: string): Promise<string | string[]> {
  * @returns returns the size of the file or the folder of the given path in bytes
  */
 function getSize(path: string): Promise<number> {
-  return stat(path)
+  return getFileType(path)
     .then((stats) => {
-      if (stats.isFile()) return stats.size;
-      if (stats.isDirectory()) {
-        return readdir(path).then((files) => {
-          const sPromises = files.map((file) => {
+      if (stats === "FILE") return stat(path).then((stats) => stats.size);
+      if (stats === "DIRECTORY") {
+        return getContents(path).then((contents) => {
+          if (!Array.isArray(contents)) return 0;
+          const sizePromises = contents.map((file) => {
             const fpath = pathM.join(path, file);
             return getSize(fpath);
           });
-          return Promise.all(sPromises).then((sizes) => {
-            return sizes.reduce((total, cSize) => total + cSize, 0);
-          });
+
+          return Promise.all(sizePromises).then((sizes) =>
+            sizes.reduce((total, cSize) => total + cSize, 0),
+          );
         });
       }
       return 0;

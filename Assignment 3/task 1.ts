@@ -1,5 +1,6 @@
 import { stat, readdir } from "fs";
 import pathMod from "path";
+import { promises as fsPromises } from "fs";
 
 /**
  * the getFileType() is a simple function that returns the path type like "FILE" | "DIRECTORY" | "OTHER". This uses promise based callback system using fs.stat based wrapper wrapping is manually
@@ -25,24 +26,21 @@ function getFileType(path: string): Promise<"FILE" | "DIRECTORY" | "OTHER"> {
  * @param path takes in the absolute path of a file or a folder
  * @returns if the path is a file then it returns the path, if it is directory it acts like the 'ls' command used in linux systems
  */
-function getContents(path: string): Promise<string | string[]> {
+const getContents = (path: string): Promise<string | string[]> => {
   return getFileType(path)
-    .then((type) => {
-      if (type === "FILE") return path;
-      if (type === "DIRECTORY") {
-        return new Promise<string | string[]>((resolve, reject) => {
-          readdir(path, (err, files) => {
-            if (err) return reject(new Error("file system error"));
-            resolve(files);
-          });
-        });
+    .then((file) => {
+      if (file === "FILE") {
+        return [path];
+      }
+      if (file === "DIRECTORY") {
+        return fsPromises.readdir(path);
       }
       return path;
     })
-    .catch(() => {
-      throw new Error("file system error");
+    .catch((err) => {
+      throw new Error("File system error: " + err.message);
     });
-}
+};
 
 /**
  * the getSize() returns the size of the file or the folder of the given path in bytes.this function also uses the promise based callback system that uses fs.stat for wrapping the function
