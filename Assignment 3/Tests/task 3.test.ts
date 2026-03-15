@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import path from "path";
-import { getFileType, getContents, getSize } from "./task 3";
+import { getFileType, getContents, getSize } from "../Tasks/task 3";
 
 describe("File system utilities", () => {
   const filePath = path.resolve(__dirname, "../Assignment 1/Stack.ts");

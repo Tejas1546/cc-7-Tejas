@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 // Import the factory function and the interface
-import { LinkedList, LinkedListInterface } from "./LinkedList";
+import { LinkedList, LinkedListInterface } from "../Tasks/LinkedList";
 
 describe("LinkedList", () => {
   describe("Add node at the end", () => {
