@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { Stack } from "./Stack"; // Imported Stack interface
+import { Stack } from "../Tasks/Stack"; // Imported Stack interface
 
 describe("Stack", () => {
   describe("Push operation", () => {

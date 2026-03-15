@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { evaluate } from "./ExpressionEvalvation";
+import { evaluate } from "../Tasks/ExpressionEvalvation";
 
 describe("Expression Evaluator using Stack", () => {
   it("should evaluate simple addition", () => {

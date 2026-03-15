@@ -94,7 +94,7 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const filePath = path.join(__dirname, "movies.json");
+const filePath = path.join(__dirname, "..", "data", "movies.json");
 const rawData = fs.readFileSync(filePath, "utf-8");
 
 const moviesData: Movie[] = JSON.parse(rawData);
