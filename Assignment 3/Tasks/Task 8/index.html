@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Post Browser</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <section class="slider">
+      <div class="slider__header">
+        <div class="post-navigation">
+          <button id="btn-prev-post" class="nav-btn" disabled>
+            &larr; Prev Post
+          </button>
+          <button id="btn-next-post" class="nav-btn">Next Post &rarr;</button>
+        </div>
+        <span class="slider__label" id="post-meta">LOADING POST...</span>
+      </div>
+
+      <div class="slider__body">
+        <div class="slider__left">
+          <h2 class="slider__title" aria-live="polite">Loading...</h2>
+          <div class="slider__footer">
+            <div class="slider__info">
+              <p class="slider__description" id="post-body">
+                Fetching data from the API...
+              </p>
+              <p class="slider__location">
+                SCROLL MOUSE WHEEL<br />TO CYCLE COMMENTS
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="slider__right">
+          <div class="slider__images"></div>
+        </div>
+      </div>
+    </section>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

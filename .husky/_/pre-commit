@@ -10,3 +10,7 @@ if [ -f "$SIMPLE_GIT_HOOKS_RC" ]; then
 fi
 
 npx pretty-quick --staged
+
+echo "Running lint-staged for Task 8..."
+cd "Assignment 3/Tasks/Task 8" || exit
+npx lint-staged
