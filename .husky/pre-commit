@@ -9,4 +9,7 @@ if [ -f "$SIMPLE_GIT_HOOKS_RC" ]; then
     . "$SIMPLE_GIT_HOOKS_RC"
 fi
 
+. "$(dirname "$0")/_/husky.sh"
+
+npx lint-staged
 npx pretty-quick --staged
