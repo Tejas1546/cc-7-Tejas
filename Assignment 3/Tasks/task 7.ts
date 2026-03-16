@@ -5,14 +5,6 @@ type Post = {
   body: string;
 };
 
-type Comments = {
-  id: number;
-  postId: number;
-  name: string;
-  email: string;
-  body: string;
-};
-
 export class APIService {
   /**
    * fetchPost() is a api function defined in the APIService class that fetches data via POST operation
@@ -33,12 +25,12 @@ export class APIService {
    * @param conut number of comments to fetch from the @param id
    * @returns a array of comments objects under the Promise wrapper
    */
-  async fetchComments(id: number, conut: number): Promise<Comments[]> {
+  async fetchComments(id: number, conut: number) {
     const response = await fetch(
       `https://jsonplaceholder.typicode.com/posts/${id}/comments`,
     );
     if (!response.ok) throw new Error(`Issue to fetch the comments ${id}`);
-    const comments: Comments[] = await response.json();
+    const comments = await response.json();
     return comments.slice(0, conut);
   }
 }
