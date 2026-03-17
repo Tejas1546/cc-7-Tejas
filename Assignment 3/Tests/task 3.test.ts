@@ -3,8 +3,8 @@ import path from "path";
 import { getFileType, getContents, getSize } from "../Tasks/task 3";
 
 describe("File system utilities", () => {
-  const filePath = path.resolve(__dirname, "../Assignment 1/Stack.ts");
-  const dirPath = path.resolve(__dirname, "../Assignment 1");
+  const filePath = path.resolve(__dirname, "../../Assignment 1/Tasks/Stack.ts");
+  const dirPath = path.resolve(__dirname, "../../Assignment 1/Tasks");
 
   it("should detect Stack.ts as a file", async () => {
     const type = await getFileType(filePath);
