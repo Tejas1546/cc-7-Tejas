@@ -16,8 +16,6 @@ let currentPostId = 1;
 const totalPosts = 10;
 
 document.addEventListener('DOMContentLoaded', () => {
-  initVisitorCounter();
-  setupEventListeners();
   loadPost();
 });
 
@@ -65,6 +63,7 @@ function renderLoading() {
       <button class="btn-secondary" disabled>Next &rarr;</button>
     </div>
   `;
+  attachButtonListeners();
 }
 
 function renderPostView(post: Post, showCommentsBtn: boolean) {
@@ -92,6 +91,7 @@ function renderPostView(post: Post, showCommentsBtn: boolean) {
       </button>
     </div>
   `;
+  attachButtonListeners();
 }
 
 function renderCommentsView(comments: Comment[]) {
@@ -140,42 +140,42 @@ async function loadComments() {
   }
 }
 
-function setupEventListeners() {
-  const root = getAppRoot();
+// --- Event Handling (Direct Bindings) ---
+function attachButtonListeners() {
+  const nextBtn = document.getElementById('btn-next');
+  const prevBtn = document.getElementById('btn-prev');
+  const refreshBtn = document.getElementById('btn-refresh');
+  const commentsBtn = document.getElementById('btn-comments');
 
-  root.addEventListener('click', (e) => {
-    const target = e.target as HTMLElement;
-    if (target.closest('#btn-next')) {
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
       if (currentPostId < totalPosts) {
         currentPostId++;
         loadPost();
       }
-    }
-    if (target.closest('#btn-prev')) {
+    });
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
       if (currentPostId > 1) {
         currentPostId--;
         loadPost();
       }
-    }
-    if (target.closest('#btn-refresh')) {
+    });
+  }
+
+  if (refreshBtn) {
+    refreshBtn.addEventListener('click', () => {
       cacheService.clear();
+      currentPostId = 1;
       loadPost();
-    }
-    if (target.closest('#btn-comments')) {
+    });
+  }
+
+  if (commentsBtn) {
+    commentsBtn.addEventListener('click', () => {
       loadComments();
-    }
-  });
-}
-
-// count visitors on the footer
-function initVisitorCounter() {
-  const counterElement = document.getElementById('visit-counter');
-  if (!counterElement) return;
-
-  const currentVisits = parseInt(
-    localStorage.getItem('post_browser_visits') || '0',
-  );
-  const newVisits = currentVisits + 1;
-  localStorage.setItem('post_browser_visits', newVisits.toString());
-  counterElement.textContent = newVisits.toString();
+    });
+  }
 }
