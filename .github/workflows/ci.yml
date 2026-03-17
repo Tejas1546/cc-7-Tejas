@@ -15,8 +15,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "24.13.0"
-          cache: "npm"
+          node-version: '24.13.0'
+          cache: 'npm'
 
       - name: Install Dependencies
         run: npm install
@@ -26,3 +26,23 @@ jobs:
 
       - name: Run All Tests and Tasks
         run: npx vitest run "**/*.ts" --exclude "node_modules/**" --passWithNoTests
+
+      - name: Install Task 8 Dependencies
+        working-directory: 'Assignment 3/Tasks/Task 8'
+        run: npm install
+
+      - name: Install Playwright Browsers & OS Dependencies
+        working-directory: 'Assignment 3/Tasks/Task 8'
+        run: npx playwright install --with-deps
+
+      - name: Run Playwright E2E Tests
+        working-directory: 'Assignment 3/Tasks/Task 8'
+        run: npx playwright test
+
+      - name: Upload Playwright Report
+        uses: actions/upload-artifact@v4
+        if: always() # This ensures the report uploads even if the tests fail
+        with:
+          name: playwright-report
+          path: 'Assignment 3/Tasks/Task 8/playwright-report/'
+          retention-days: 7
