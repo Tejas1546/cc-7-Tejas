@@ -291,5 +291,3 @@ vite.config.ts.timestamp-*
 # simple-git-hooks config (if you want to ignore it, otherwise commit it)
 #.simple-git-hooks.json
 
-# Husky git hooks directory
-.husky/

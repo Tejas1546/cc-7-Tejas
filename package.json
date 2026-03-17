@@ -5,7 +5,10 @@
   "type": "module",
   "scripts": {
     "test": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write ."
   },
   "repository": {
     "type": "git",
@@ -17,7 +20,10 @@
   "homepage": "https://github.com/Tejas1546/cc-7-Tejas#readme",
   "license": "ISC",
   "lint-staged": {
-    "*.{js,ts}": "eslint --fix"
+    "*.{js,ts}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   },
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged"
@@ -25,11 +31,18 @@
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@types/node": "^25.2.3",
+    "eslint": "^10.0.3",
+    "eslint-config-prettier": "^10.1.8",
     "eslint-define-config": "^2.1.0",
-    "globals": "^17.3.0",
+    "eslint-plugin-prettier": "^5.5.5",
+    "globals": "^17.4.0",
+    "husky": "^9.1.7",
+    "jiti": "^2.6.1",
+    "lint-staged": "^16.4.0",
+    "prettier": "^3.8.1",
     "pretty-quick": "^4.2.2",
     "simple-git-hooks": "^2.13.1",
-    "typescript-eslint": "^8.56.0",
+    "typescript-eslint": "^8.57.0",
     "vitest": "^4.0.18"
   },
   "description": ""
