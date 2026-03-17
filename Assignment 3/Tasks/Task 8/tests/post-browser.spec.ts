@@ -51,16 +51,19 @@ test.describe('Post Browser E2E Tests', () => {
     ).toBeVisible();
   });
 
-  test('handle failures when fetching comments', async ({ page }) => {
+  test('display an error message when failing to fetch comments', async ({
+    page,
+  }) => {
     await page.route(
       'https://jsonplaceholder.typicode.com/posts/1/comments',
       async (route) => {
         await route.fulfill({ status: 500, body: 'Internal Server Error' });
       },
     );
-
     await page.click('#btn-comments');
-    await expect(page.locator('.comments-section')).not.toBeVisible();
+    await expect(page.locator('#comments-container')).toContainText(
+      'Failed to load comments.',
+    );
   });
 
   //Refresh, loads back the 1st post, discarding existing data

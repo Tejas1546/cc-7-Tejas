@@ -137,6 +137,10 @@ async function loadComments() {
     renderCommentsView(comments);
   } catch (error) {
     console.error('Failed to load comments', error);
+    const container = document.getElementById('comments-container');
+    if (container) {
+      container.innerHTML = `<p style="text-align: center; color: red;">Failed to load comments.</p>`;
+    }
   }
 }
 
