@@ -1,6 +1,6 @@
 html {
   font-size: 10px;
-  background: url(http://i.imgur.com/b9r5sEL.jpg) bottom center;
+  background: rgba(255, 255, 255, 0.1);
   background-size: cover;
 }
 body,
@@ -48,4 +48,36 @@ kbd {
   text-transform: uppercase;
   letter-spacing: 1px;
   color: #ffc600;
+}
+
+/* Container for the bottom controls */
+.system-controls {
+  position: fixed;
+  bottom: 4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 2rem;
+  z-index: 10;
+}
+
+/* Specific styling for control keys */
+.control-key {
+  width: 120px; /* Slightly wider for the labels */
+  border-color: #555;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Visual state for Recording */
+.recording-active {
+  border-color: #ff4d4d;
+  box-shadow: 0 0 20px #ff4d4d;
+  color: #ff4d4d;
+}
+
+/* Visual state for Playing back */
+.playback-active {
+  border-color: #4dff88;
+  box-shadow: 0 0 20px #4dff88;
+  color: #4dff88;
 }
