@@ -2,7 +2,9 @@ name: TypeScript CI
 
 on:
   push:
+    branches: [main]
   pull_request:
+    branches: [main]
 
 jobs:
   build-and-test:
@@ -15,14 +17,52 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "24.13.0"
-          cache: "npm"
+          node-version: '24.13.0'
+          cache: 'npm'
 
+      # Install root dependencies (faster with npm ci)
       - name: Install Dependencies
-        run: npm install
+        run: npm ci
 
       - name: Run Linter
         run: npx eslint .
 
-      - name: Run All Tests and Tasks
+      - name: Run Unit Tests (Vitest)
         run: npx vitest run "**/*.ts" --exclude "node_modules/**" --passWithNoTests
+
+      # Cache Playwright browsers (BIG speed improvement)
+      - name: Cache Playwright Browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('**/package-lock.json') }}
+
+      # Cache Task 8 dependencies
+      - name: Cache Task 8 node_modules
+        uses: actions/cache@v4
+        with:
+          path: Assignment 3/Tasks/Task 8/node_modules
+          key: ${{ runner.os }}-task8-${{ hashFiles('Assignment 3/Tasks/Task 8/package-lock.json') }}
+
+      # Install Task 8 dependencies
+      - name: Install Task 8 Dependencies
+        working-directory: 'Assignment 3/Tasks/Task 8'
+        run: npm ci
+
+      # Install Playwright browsers (will be fast after caching)
+      - name: Install Playwright Browsers
+        working-directory: 'Assignment 3/Tasks/Task 8'
+        run: npx playwright install --with-deps
+
+      # Run Playwright tests in parallel
+      - name: Run Playwright E2E Tests
+        working-directory: 'Assignment 3/Tasks/Task 8'
+        run: npx playwright test --workers=2
+
+      - name: Upload Playwright Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report
+          path: 'Assignment 3/Tasks/Task 8/playwright-report/'
+          retention-days: 7
