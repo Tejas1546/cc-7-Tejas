@@ -1,0 +1,83 @@
+html {
+  font-size: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  background-size: cover;
+}
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.keys {
+  display: flex;
+  flex: 1;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.key {
+  border: 4px solid black;
+  border-radius: 5px;
+  margin: 1rem;
+  font-size: 1.5rem;
+  padding: 1rem 0.5rem;
+  transition: all 0.07s;
+  width: 100px;
+  text-align: center;
+  color: white;
+  background: rgba(0, 0, 0, 0.4);
+  text-shadow: 0 0 5px black;
+}
+
+.playing {
+  transform: scale(1.1);
+  border-color: #ffc600;
+  box-shadow: 0 0 10px #ffc600;
+}
+
+kbd {
+  display: block;
+  font-size: 40px;
+}
+
+.sound {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #ffc600;
+}
+
+/* Container for the bottom controls */
+.system-controls {
+  position: fixed;
+  bottom: 4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 2rem;
+  z-index: 10;
+}
+
+/* Specific styling for control keys */
+.control-key {
+  width: 120px; /* Slightly wider for the labels */
+  border-color: #555;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Visual state for Recording */
+.recording-active {
+  border-color: #ff4d4d;
+  box-shadow: 0 0 20px #ff4d4d;
+  color: #ff4d4d;
+}
+
+/* Visual state for Playing back */
+.playback-active {
+  border-color: #4dff88;
+  box-shadow: 0 0 20px #4dff88;
+  color: #4dff88;
+}
