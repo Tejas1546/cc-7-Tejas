@@ -14,7 +14,7 @@ export type ApplicationState = {
     | 'recording-paused'
     | 'playback-progress'
     | 'playback-paused';
-  recordings: Recording[];
+  recordings: Recording | null;
 };
 
 type StartRecordingAction = {
@@ -50,7 +50,7 @@ type ContinuePlaybackAction = {
   type: 'CONTINUE_PLAYBACK';
 };
 
-type Action =
+export type Action =
   | StartRecordingAction
   | StartPlaybackAction
   | ContinueRecordingAction
@@ -61,12 +61,12 @@ type Action =
   | StopPlaybackAction
   | ContinuePlaybackAction;
 
-const initialState: ApplicationState = {
+export const initialState: ApplicationState = {
   mode: 'normal',
-  recordings: [],
+  recordings: null,
 };
 
-const reducer = (
+export const reducer = (
   state: ApplicationState = initialState,
   action: Action,
 ): ApplicationState => {
@@ -79,11 +79,13 @@ const reducer = (
           };
           return {
             mode: 'recording-progress',
-            recordings: state.recordings.concat(newRecording),
+            recordings: newRecording,
           };
         }
         case 'START_PLAYBACK': {
-          if (state.recordings.length === 0) return state;
+          if (!state.recordings || state.recordings.beats.length === 0) {
+            return state;
+          }
           return {
             mode: 'playback-progress',
             recordings: state.recordings,
@@ -106,15 +108,15 @@ const reducer = (
             recordings: state.recordings,
           };
         case 'BEAT': {
-          const lastIndex = state.recordings.length - 1;
-          const currentRecording = state.recordings[lastIndex];
+          if (!state.recordings) return state;
+
           const updatedRecording: Recording = {
-            beats: currentRecording.beats.concat(action.data),
+            beats: state.recordings.beats.concat(action.data),
           };
-          const previousRecordings = state.recordings.slice(0, lastIndex);
+
           return {
             mode: state.mode,
-            recordings: previousRecordings.concat(updatedRecording),
+            recordings: updatedRecording,
           };
         }
         default:
@@ -172,20 +174,4 @@ const reducer = (
     default:
       return state;
   }
-};
-
-let currentState: ApplicationState = initialState;
-const listeners: Array<() => void> = [];
-
-export const getState = (): ApplicationState => {
-  return currentState;
-};
-
-export const subscribe = (listener: () => void): void => {
-  listeners.push(listener);
-};
-
-export const dispatch = (action: Action): void => {
-  currentState = reducer(currentState, action);
-  listeners.forEach((listener) => listener());
 };
