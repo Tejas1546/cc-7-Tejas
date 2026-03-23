@@ -52,6 +52,7 @@ describe('Player Class Engine', () => {
         { timestamp: 6000, key: 'b4' },
       ]);
     });
+<<<<<<< HEAD
 
     it('additional Delay', () => {
       const events: TrackEvent[] = [
@@ -90,6 +91,8 @@ describe('Player Class Engine', () => {
         { timestamp: 4000, key: 'b4' },
       ]);
     });
+=======
+>>>>>>> 0a11067 (corrected reducer implimentation and implimented player logic)
   });
 
   describe('Playback Engine', () => {
