@@ -1,3 +1,5 @@
+// --- TYPES ---
+
 export type Beat = {
   key: string;
   timestamp: number;
@@ -15,40 +17,30 @@ export type ApplicationState = {
     | 'playback-progress'
     | 'playback-paused';
   recordings: Recording | null;
+  recordingStartTime: number;
+  recordingOffset: number;
+  playbackOffset: number;
 };
 
-type StartRecordingAction = {
-  type: 'START_RECORDING';
-  timestamp: number;
-};
-type StartPlaybackAction = {
-  type: 'START_PLAYBACK';
-};
+type StartRecordingAction = { type: 'START_RECORDING'; timestamp: number };
+type StartPlaybackAction = { type: 'START_PLAYBACK' };
 type ContinueRecordingAction = {
   type: 'CONTINUE_RECORDING';
-  timestamp: number;
+  newStartTime: number;
 };
-type StopRecordingAction = {
-  type: 'STOP_RECORDING';
-};
-type PauseRecordingAction = {
-  type: 'PAUSE_RECORDING';
-  timestamp: number;
-};
+type StopRecordingAction = { type: 'STOP_RECORDING' };
+type PauseRecordingAction = { type: 'PAUSE_RECORDING'; currentOffset: number };
 type BeatAction = {
   type: 'BEAT';
   data: Beat;
+  newStartTime?: number;
 };
 type PausePlaybackAction = {
   type: 'PAUSE_PLAYBACK';
-  timestamp: number;
+  currentPlaybackTime: number;
 };
-type StopPlaybackAction = {
-  type: 'STOP_PLAYBACK';
-};
-type ContinuePlaybackAction = {
-  type: 'CONTINUE_PLAYBACK';
-};
+type StopPlaybackAction = { type: 'STOP_PLAYBACK' };
+type ContinuePlaybackAction = { type: 'CONTINUE_PLAYBACK' };
 
 export type Action =
   | StartRecordingAction
@@ -64,6 +56,9 @@ export type Action =
 export const initialState: ApplicationState = {
   mode: 'normal',
   recordings: null,
+  recordingStartTime: 0,
+  recordingOffset: 0,
+  playbackOffset: 0,
 };
 
 export const reducer = (
@@ -73,24 +68,22 @@ export const reducer = (
   switch (state.mode) {
     case 'normal':
       switch (action.type) {
-        case 'START_RECORDING': {
-          const newRecording: Recording = {
-            beats: [],
-          };
+        case 'START_RECORDING':
           return {
             mode: 'recording-progress',
-            recordings: newRecording,
+            recordings: { beats: [] },
+            recordingStartTime: action.timestamp,
+            recordingOffset: 0,
+            playbackOffset: 0,
           };
-        }
-        case 'START_PLAYBACK': {
-          if (!state.recordings || state.recordings.beats.length === 0) {
+        case 'START_PLAYBACK':
+          if (!state.recordings || state.recordings.beats.length === 0)
             return state;
-          }
           return {
+            ...state,
             mode: 'playback-progress',
-            recordings: state.recordings,
+            playbackOffset: 0,
           };
-        }
         default:
           return state;
       }
@@ -99,26 +92,25 @@ export const reducer = (
       switch (action.type) {
         case 'PAUSE_RECORDING':
           return {
+            ...state,
             mode: 'recording-paused',
-            recordings: state.recordings,
+            recordingOffset: action.currentOffset,
           };
         case 'STOP_RECORDING':
-          return {
-            mode: 'normal',
-            recordings: state.recordings,
-          };
-        case 'BEAT': {
+          return { ...state, mode: 'normal' };
+        case 'BEAT':
           if (!state.recordings) return state;
 
-          const updatedRecording: Recording = {
-            beats: state.recordings.beats.concat(action.data),
-          };
-
           return {
-            mode: state.mode,
-            recordings: updatedRecording,
+            ...state,
+            recordings: {
+              beats: state.recordings.beats.concat(action.data),
+            },
+            recordingStartTime:
+              action.newStartTime !== undefined
+                ? action.newStartTime
+                : state.recordingStartTime,
           };
-        }
         default:
           return state;
       }
@@ -127,14 +119,12 @@ export const reducer = (
       switch (action.type) {
         case 'CONTINUE_RECORDING':
           return {
+            ...state,
             mode: 'recording-progress',
-            recordings: state.recordings,
+            recordingStartTime: action.newStartTime,
           };
         case 'STOP_RECORDING':
-          return {
-            mode: 'normal',
-            recordings: state.recordings,
-          };
+          return { ...state, mode: 'normal' };
         default:
           return state;
       }
@@ -143,13 +133,15 @@ export const reducer = (
       switch (action.type) {
         case 'PAUSE_PLAYBACK':
           return {
+            ...state,
             mode: 'playback-paused',
-            recordings: state.recordings,
+            playbackOffset: action.currentPlaybackTime,
           };
         case 'STOP_PLAYBACK':
           return {
+            ...state,
             mode: 'normal',
-            recordings: state.recordings,
+            playbackOffset: 0,
           };
         default:
           return state;
@@ -159,18 +151,18 @@ export const reducer = (
       switch (action.type) {
         case 'CONTINUE_PLAYBACK':
           return {
+            ...state,
             mode: 'playback-progress',
-            recordings: state.recordings,
           };
         case 'STOP_PLAYBACK':
           return {
+            ...state,
             mode: 'normal',
-            recordings: state.recordings,
+            playbackOffset: 0,
           };
         default:
           return state;
       }
-
     default:
       return state;
   }
