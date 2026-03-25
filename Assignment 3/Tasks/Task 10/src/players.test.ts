@@ -52,6 +52,44 @@ describe('Player Class Engine', () => {
         { timestamp: 6000, key: 'b4' },
       ]);
     });
+
+    it('additional Delay', () => {
+      const events: TrackEvent[] = [
+        { type: 'beat', timestamp: 0, key: 'b1' },
+        { type: 'beat', timestamp: 2000, key: 'b2' },
+        { type: 'pause', timestamp: 4000 },
+        { type: 'beat', timestamp: 8000, key: 'b3' },
+        { type: 'beat', timestamp: 10000, key: 'b4' },
+        { type: 'pause', timestamp: 12000 },
+        { type: 'beat', timestamp: 20000, key: 'b2' },
+      ];
+      const player = new Player({ events }, mockPlayback);
+
+      expect(player.playableBeats).toEqual([
+        { timestamp: 0, key: 'b1' },
+        { timestamp: 2000, key: 'b2' },
+        { timestamp: 4000, key: 'b3' },
+        { timestamp: 6000, key: 'b4' },
+        { timestamp: 8000, key: 'b2' },
+      ]);
+    });
+
+    it('multiple pause', () => {
+      const events: TrackEvent[] = [
+        { type: 'beat', timestamp: 0, key: 'b1' },
+        { type: 'beat', timestamp: 2000, key: 'b2' },
+        { type: 'pause', timestamp: 4000 },
+        { type: 'pause', timestamp: 6000 },
+        { type: 'beat', timestamp: 8000, key: 'b4' },
+      ];
+      const player = new Player({ events }, mockPlayback);
+
+      expect(player.playableBeats).toEqual([
+        { timestamp: 0, key: 'b1' },
+        { timestamp: 2000, key: 'b2' },
+        { timestamp: 4000, key: 'b4' },
+      ]);
+    });
   });
 
   describe('Playback Engine', () => {
