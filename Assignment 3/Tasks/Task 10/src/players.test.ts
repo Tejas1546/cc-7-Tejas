@@ -53,6 +53,9 @@ describe('Player Class Engine', () => {
       ]);
     });
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 522cf3f (added additional tests and implimented fixes)
 
     it('additional Delay', () => {
       const events: TrackEvent[] = [
@@ -91,8 +94,11 @@ describe('Player Class Engine', () => {
         { timestamp: 4000, key: 'b4' },
       ]);
     });
+<<<<<<< HEAD
 =======
 >>>>>>> 0a11067 (corrected reducer implimentation and implimented player logic)
+=======
+>>>>>>> 522cf3f (added additional tests and implimented fixes)
   });
 
   describe('Playback Engine', () => {
