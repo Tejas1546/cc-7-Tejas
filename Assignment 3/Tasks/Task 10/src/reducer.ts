@@ -167,3 +167,8 @@ export const reducer = (
       return state;
   }
 };
+export const isCurrentlyRecording = (state: ApplicationState): boolean => {
+  return (
+    state.mode === 'recording-progress' || state.mode === 'recording-paused'
+  );
+};
