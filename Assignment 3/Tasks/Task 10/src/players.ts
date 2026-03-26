@@ -35,20 +35,10 @@ export class Player {
 
     for (const ev of events) {
       if (ev.type === 'pause') {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 522cf3f (added additional tests and implimented fixes)
         if (lastPauseTime === null) {
           // handles multiple concurrent pauses
           lastPauseTime = ev.timestamp; //records the pause timestamp
         }
-<<<<<<< HEAD
-=======
-        lastPauseTime = ev.timestamp; //records the pause timestamp
->>>>>>> 0a11067 (corrected reducer implimentation and implimented player logic)
-=======
->>>>>>> 522cf3f (added additional tests and implimented fixes)
       } else if (ev.type === 'beat') {
         let gap: number;
         if (lastPauseTime !== null) {
