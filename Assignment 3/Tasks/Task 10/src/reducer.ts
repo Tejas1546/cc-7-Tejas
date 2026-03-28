@@ -1,5 +1,3 @@
-// --- TYPES ---
-
 export type Beat = {
   key: string;
   timestamp: number;
