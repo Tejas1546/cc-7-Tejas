@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JS Drum Kit</title>
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+
+  <body>
+    <div class="keys">
+      <div data-key="KeyA" class="key">
+        <kbd>A</kbd>
+        <span class="sound">clap</span>
+      </div>
+      <div data-key="KeyS" class="key">
+        <kbd>S</kbd>
+        <span class="sound">hihat</span>
+      </div>
+      <div data-key="KeyD" class="key">
+        <kbd>D</kbd>
+        <span class="sound">kick</span>
+      </div>
+      <div data-key="KeyF" class="key">
+        <kbd>F</kbd>
+        <span class="sound">openhat</span>
+      </div>
+      <div data-key="KeyG" class="key">
+        <kbd>G</kbd>
+        <span class="sound">boom</span>
+      </div>
+      <div data-key="KeyH" class="key">
+        <kbd>H</kbd>
+        <span class="sound">ride</span>
+      </div>
+      <div data-key="KeyJ" class="key">
+        <kbd>J</kbd>
+        <span class="sound">snare</span>
+      </div>
+      <div data-key="KeyK" class="key">
+        <kbd>K</kbd>
+        <span class="sound">tom</span>
+      </div>
+      <div data-key="KeyL" class="key">
+        <kbd>L</kbd>
+        <span class="sound">tink</span>
+      </div>
+    </div>
+
+    <div class="control-panel">
+      <div class="control-group" id="record-zone">
+        <div data-key="KeyR" class="key control-key" id="record-btn">
+          <kbd>R</kbd>
+          <span class="sound">Record</span>
+        </div>
+
+        <div data-key="KeyE" class="key control-key" id="pause-record-btn">
+          <kbd>E</kbd>
+          <span class="sound">Pause Rec</span>
+        </div>
+      </div>
+
+      <div class="control-group disabled-zone" id="playback-zone">
+        <div data-key="Space" class="key control-key" id="play-btn">
+          <kbd>␣</kbd>
+          <span class="sound">Play/Pause</span>
+        </div>
+
+        <div class="progress-container">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+      </div>
+    </div>
+
+    <audio data-key="KeyA" src="/clap.wav"></audio>
+    <audio data-key="KeyS" src="/hihat.wav"></audio>
+    <audio data-key="KeyD" src="/kick.wav"></audio>
+    <audio data-key="KeyF" src="/openhat.wav"></audio>
+    <audio data-key="KeyG" src="/boom.wav"></audio>
+    <audio data-key="KeyH" src="/ride.wav"></audio>
+    <audio data-key="KeyJ" src="/snare.wav"></audio>
+    <audio data-key="KeyK" src="/tom.wav"></audio>
+    <audio data-key="KeyL" src="/tink.wav"></audio>
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>
